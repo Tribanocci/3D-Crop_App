@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <!-- Bootstrap CSS -->
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+       <!-- Icons-->
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+       <!--Mystyle-->
+       
+    <!-- Add jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+       <title>Crop App</title>
+
+   
+
+  <script type="module" crossorigin src="assets/index-88e7d3b2.js"></script>
+  <link rel="stylesheet" href="assets/index-4b1b52a7.css">
+</head>
+<body>
+    	  <!-- Modal -->
+	  <div id="myModal" class="modal fade">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">App's info</h5>
+					<button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>This app demonstrates <b>the boolean operations</b> availiable from the <i>three.js CSG</i> module.</p>
+					<p>Camera controls</p>
+					<ul>
+						<li>Rotate camera: Pressing <span style="padding-right:3px; padding-top: 3px; display:inline-block;"><img src="assets/middle_mouse-3c23ace2.svg" class="mouse-icons" ></img></span> and moving mouse.</li>
+						<li>Pan camera: Pressing <span style="padding-right:3px; padding-top: 3px; display:inline-block;"><img src="assets/right_mouse-437982a1.svg" class="mouse-icons" ></img></span> and moving mouse.</li>
+					</ul>
+					<p><b>Selecting</b> objects with <span style="padding-right:3px; padding-top: 3px; display:inline-block;"><img src="assets/left_click-e76d1cdc.svg" class="mouse-icons" ></img></span> on the desired 3D object.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+   <!-- Modal -->
+    <div class="btn-container">
+        <div class="container-header"> Options <i id="info-display" class="bi bi-info-circle-fill info-button"></i></div>
+        <hr>
+        <button id="toggleGizmos" class="button" >Gizmos</button>
+        <button id="toggleSelect" class="button" >Select space</button>
+        <button id="subtractBtn" class="button" >CSG Subtract</button>
+        <hr>
+        <div class="info-text-cont">
+            <div id="info-text-header">
+                <h5>Step 1:</h5>
+            </div>
+            <div id="info-text-text">
+                <p>With <i>Select Space</i> button a semi-transpace cube will be availiable. Its purpose is to select the space of a Object to be <b>subtracted</b></p>
+            </div>
+            <div class="info-text-arrows">
+                <i id="left" onclick="previousText()" class="bi bi-caret-left-fill"></i><i onclick="nextText()" id ="right" class="bi bi-caret-right-fill"></i>
+            </div>
+        </div>
+        <hr>
+        <div id="info-Gizmos">
+            <h5>Gizmos controls</h5>
+            <p><kbd>R</kbd> : Rotation</p>
+            <p><kbd>T</kbd> : Translation</p>
+            <p><kbd>S</kbd> : Scale</p>
+        </div>
+     </div>
+    <div class="app"></div>
+    <script>
+        window.addEventListener('mousedown', function(evt) {
+         if (evt.button === 1) {
+             evt.preventDefault();
+         }
+     });
+    </script>
+    <script >
+        $(window).on('load', function() {
+            $('#myModal').modal('show');
+        });
+
+ // Adding a click event to the icon
+    document.getElementById('info-display').addEventListener('click', function() {
+        // Add your desired functionality here
+        $('#myModal').modal('show');
+    });
+    </script>
+    <script>
+    var header = document.getElementById('info-text-header');
+    var text = document.getElementById('info-text-text');
+    var currentIndex = 0;
+    var dialogHeaders = [ "<h5>Step 1:</h5>", 
+                          "<h5>Step 2:</h5>", 
+                          "<h5>Step 3:</h5>",
+                          "<h5>Step 4:</h5>"];
+    var dialogTexts = ["<p>With <i>Select Space</i> button a semi-transpace cube will be availiable. Its purpose is to select the space of a Object to be <b>subtracted</b>.</p>", 
+                       "<p>With <i>Gizmos</i> button a Transform controls Gizmos will be availiable. After selecting the semi-transparente cube (green), the gizmos will be attached to it. Then, you can place the cube to the object you want to cut.</p>",
+                       "<p>Hide <i>Gizmos</i>, by pressing the button. Then, select the object that will be cut. </p>",
+                       "<p>With <i>CSG Subtract</i> button and a selected object, the cut will be done. Now a object that is the boolean subctract of the selected (orage) object and the semi-transparant (green) cube is added to the scene.</p>"];
+    function previousText() {
+      currentIndex = (currentIndex === 0) ? dialogTexts.length - 1 : currentIndex - 1;
+      header.innerHTML = dialogHeaders[currentIndex];
+      text.innerHTML = dialogTexts[currentIndex];
+    }
+
+    function nextText() {
+      currentIndex = (currentIndex === dialogTexts.length - 1) ? 0 : currentIndex + 1;
+      header.innerHTML = dialogHeaders[currentIndex];
+      text.innerHTML = dialogTexts[currentIndex];
+    }
+
+    </script>
+    
+</body>
+
+</html>
